@@ -1,0 +1,57 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    },
+    {
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/admin/login",
+      "dest": "/api/admin/login.js"
+    },
+    {
+      "src": "/api/admin/create",
+      "dest": "/api/admin/login.js"
+    },
+    {
+      "src": "/api/products/latest",
+      "dest": "/api/products/latest.js"
+    },
+    {
+      "src": "/api/products/category/([^/]+)",
+      "dest": "/api/products/category/[name].js?name=$1"
+    },
+    {
+      "src": "/api/products/([^/]+)",
+      "dest": "/api/products/[id].js?id=$1"
+    },
+    {
+      "src": "/api/products",
+      "dest": "/api/products.js"
+    },
+    {
+      "src": "/api/orders/([^/]+)",
+      "dest": "/api/orders/[id].js?id=$1"
+    },
+    {
+      "src": "/api/orders",
+      "dest": "/api/orders.js"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}
